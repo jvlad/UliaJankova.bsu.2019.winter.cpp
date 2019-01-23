@@ -45,26 +45,33 @@ class TRIAD
     GEN_SET_AND_GET(second)
     GEN_SET_AND_GET(third)
 
-    friend bool operator < (const TRIAD &lhs, const TRIAD &rhs)
+    friend bool operator <(const TRIAD &lhs, const TRIAD &rhs)
     {
-        // lexicagraphical compare
-        return lhs.get_first() == rhs.get_first()
-        //std::tie(lhs.first, lhs.second, lhs.third) < std::tie(rhs.first, rhs.second, rhs.third)
-                   ? (
-                         lhs.get_second() == rhs.get_second()
-                             ? lhs.get_third() < rhs.get_third()
-                             : lhs.get_second() < rhs.get_second())
-                   : lhs.get_first() < rhs.get_first();
+        if (lhs.get_first() == rhs.get_first())
+        {
+            if (lhs.get_second() == rhs.get_second())
+            {
+                return lhs.get_third() < rhs.get_third();
+            }
+            else
+            {
+                return lhs.get_second() < rhs.get_second());
+            }
+        }
+        else
+        {
+            return lhs.get_first() < rhs.get_first();
+        }
     }
 
-    friend bool operator == (const TRIAD &lhs, const TRIAD &rhs)
-    {
-        return !(lhs < rhs || rhs < lhs);
-    }
-
-    friend bool operator > (const TRIAD &lhs, const TRIAD &rhs)
+    friend bool operator >(const TRIAD &lhs, const TRIAD &rhs)
     {
         return rhs < lhs;
+    }
+    
+    friend bool operator ==(const TRIAD &lhs, const TRIAD &rhs)
+    {
+        return !(lhs < rhs || rhs < lhs);
     }
 };
 
